@@ -40,19 +40,24 @@ usageSubmit.addEventListener("click", function () {
           costJan = 0;
         } else if (usageJan.value <= 500) {
           costJan =
-            ((usageJan.value * allPlans.data[0].price_kwh500) / 500 / 100) *
+            ((usageJan.value * allPlans.data[index].price_kwh500) / 500 / 100) *
             usageJan.value; // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
         } else if (usageJan <= 1000) {
           costJan =
-            ((usageJan.value * allPlans.data[0].price_kwh1000) / 1000 / 100) *
+            ((usageJan.value * allPlans.data[index].price_kwh1000) /
+              1000 /
+              100) *
             usageJan.value; // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
         } else {
           costJan =
-            ((usageJan.value * allPlans.data[0].price_kwh2000) / 2000 / 100) *
+            ((usageJan.value * allPlans.data[index].price_kwh2000) /
+              2000 /
+              100) *
             usageJan.value; // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
         }
-        // allPlans.data.push({ janCost: costJan });
+
         console.log(costJan);
+        console.log(allPlans.data[index].plan_name);
       }
 
       //   let allPlansHTMLoutput = `<div class="card">
