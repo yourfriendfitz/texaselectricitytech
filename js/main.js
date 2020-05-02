@@ -33,7 +33,7 @@ usageSubmit.addEventListener("click", function () {
   fetch(proxyUrl + callAddress)
     .then((response) => response.json())
     .then((allPlans) => {
-      // console.log(allPlans);
+      console.log(allPlans);
       for (index = 0; index < allPlans.data.length; index++) {
         let costJan = 0;
         if (usageJan.value == 0) {
@@ -51,10 +51,10 @@ usageSubmit.addEventListener("click", function () {
             ((usageJan.value * allPlans.data[0].price_kwh2000) / 2000 / 100) *
             usageJan.value; // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
         }
-        allPlans.data.push({ janCost: costJan });
-        // console.log(costJan);
+        // allPlans.data.push({ janCost: costJan });
+        console.log(costJan);
       }
-      console.log(allPlans);
+
       //   let allPlansHTMLoutput = `<div class="card">
       //                           <div class="card-body">
       //                               <h5 class="card-title">${allPlans.data[0].plan_name}</h5>
