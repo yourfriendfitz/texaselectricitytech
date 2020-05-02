@@ -28,10 +28,12 @@
         your experience.
       </p>
     <![endif]-->
-    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <nav class="navbar navbar-dark bg-dark navbar-fixed-top" role="navigation">
       <div class="container">
         <div class="navbar-header">
-          <a class="navbar-brand" href="#">TexasElectricity</a>
+          <a class="navbar-brand" href="#">
+            <img src="/img/logoWHITE.svg" height="30" alt="">
+          </a>
         </div>
         <!--/.navbar-collapse -->
       </div>
@@ -51,9 +53,127 @@
         </p>
         <p>
           <div class="container">
-            <form class="form-inline">
+            <form class="form">
+              <div class="form-row">
+                <div class="form-group col">
+              <label for="usageJan">January</label>
               <input
-                type="text"
+                type="number" value="600"
+                class="form-control"
+                placeholder="January"
+                id="usageJan"
+              />
+              </div>
+              <div class="form-group col">
+              <label for="usageFeb">February</label>
+              <input
+              type="number" value="900"
+              class="form-control"
+              placeholder="February"
+              id="usageFeb"
+              />
+              </div>
+              <div class="form-group col">
+              <label for="usageMar">March</label>
+              <input
+              type="number" value="400"
+              class="form-control"
+              placeholder="March"
+              id="usageMar"
+              />
+              </div>
+              <div class="form-group col">
+              <label for="usageApr">April</label>
+              <input
+              type="number" value="1100"
+              class="form-control"
+              placeholder="April"
+              id="usageApr"
+              />
+              </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col">
+              <label for="usageMay">May</label>
+              <input
+              type="number" value="300"
+              class="form-control"
+              placeholder="May"
+              id="usageMay"
+              />
+              </div>
+              <div class="form-group col">
+              <label for="usageJun">June</label>
+              <input
+              type="number" value="600"
+              class="form-control"
+              placeholder="June"
+              id="usageJun"
+              />
+              </div>
+              <div class="form-group col">
+              <label for="usageJul">July</label>
+              <input
+              type="number" value="500"
+              class="form-control"
+              placeholder="July"
+              id="usageJul"
+              />
+              </div>
+              <div class="form-group col">
+              <label for="usageAug">August</label>
+              <input
+              type="number" value="2000"
+              class="form-control"
+              placeholder="August"
+              id="usageAug"
+              />
+              </div>
+              </div>
+              <div class="form-row">
+                <div class="form-group col">
+              <label for="usageSep">September</label>
+              <input
+              type="number" value="600"
+              class="form-control"
+              placeholder="September"
+              id="usageSep"
+              />
+              </div>
+              <div class="form-group col">
+              <label for="usageOct">October</label>
+              <input
+              type="number" value="600"
+              class="form-control"
+              placeholder="October"
+              id="usageOct"
+              />
+              </div>
+              <div class="form-group col">
+              <label for="usageNov">November</label>
+              <input
+              type="number" value="600"
+              class="form-control"
+              placeholder="November"
+              id="usageNov"
+              />
+              </div>
+              <div class="form-group col">
+              <label for="usageDec">December</label>
+              <input
+              type="number" value="600"
+              class="form-control"
+              placeholder="December"
+              id="usageDec"
+              />
+              </div>
+              </div>
+              <div class="form-row justify-content-center">
+              <div class="form-group col-4">
+              <label for="userZIP">ZIP Code</label>
+              <input
+                type="zip"
+                value="77080"
                 class="form-control"
                 placeholder="Enter Your ZIP Code"
                 id="userZIP"
@@ -61,6 +181,8 @@
               <button id="usageSubmit" class="btn btn-primary m-2" type="button">
                 Get My Best Electricity Plan
               </button>
+              </div>
+              </div>
             </form>
           </div>
         </p>
