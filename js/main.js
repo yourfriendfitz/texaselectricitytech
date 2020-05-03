@@ -43,14 +43,14 @@ function calcMonthCost(monthlyUsageCost, plan) {
 // sort array by lowest cost
 
 /**
- * Gets the plans from the powertochoose API from the provided zipcode
+ * Gets the plans from the powertochoose API from the provided zip code
  *
- * @param zipCode The zip code to get the plans for
- * @returns a promise of the avaliable plans from the API
+ * @param userZipCode The zip code to get the plans for
+ * @returns a promise of the available plans from the API
  */
-function getPlans(zipcode) {
+function getPlans(userZipCode) {
   let proxyUrl = `https://cors-anywhere.herokuapp.com/`;
-  let callAddress = `http://api.powertochoose.org/api/PowerToChoose/plans?zip_code=${zipcode}`;
+  let callAddress = `http://api.powertochoose.org/api/PowerToChoose/plans?zip_code=${userZipCode}`;
   return fetch(proxyUrl + callAddress, {
     cache: "force-cache",
   }).then((response) => response.json());
@@ -78,11 +78,11 @@ function getUserAnnualCost() {
 }
 
 usageSubmit.addEventListener("click", async () => {
-  const avaliablePlans = await getPlans(
+  const availablePlans = await getPlans(
     document.getElementById("userZIP").value
   );
 
-  avaliablePlans.forEach((plan) => {
+  availablePlans.forEach((plan) => {
     usages.forEach((usage, index) => {
       //iterate through each month in months
     });
