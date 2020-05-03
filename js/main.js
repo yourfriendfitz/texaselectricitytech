@@ -28,11 +28,13 @@ let planResults = document.getElementById("planResults");
 // sort array by lowest cost
 
 usageSubmit.addEventListener("click", function () {
+  //api call
   let proxyUrl = `https://cors-anywhere.herokuapp.com/`;
   let callAddress = `http://api.powertochoose.org/api/PowerToChoose/plans?zip_code=${userZIP.value}`;
   fetch(proxyUrl + callAddress)
     .then((response) => response.json())
     .then((allPlans) => {
+      //end api call
       console.log(allPlans);
       for (index = 0; index < allPlans.data.length; index++) {
         let costJan = 0;
@@ -42,7 +44,7 @@ usageSubmit.addEventListener("click", function () {
           costJan =
             ((usageJan.value * allPlans.data[index].price_kwh500) / 500 / 100) *
             usageJan.value; // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
-        } else if (usageJan <= 1000) {
+        } else if (usageJan.value <= 1000) {
           costJan =
             ((usageJan.value * allPlans.data[index].price_kwh1000) /
               1000 /
@@ -56,8 +58,18 @@ usageSubmit.addEventListener("click", function () {
             usageJan.value; // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
         }
 
-        console.log(costJan);
-        console.log(allPlans.data[index].plan_name);
+        let allPlansHTMLoutput = `<div class="card">
+                                 <div class="card-body">
+                                     <h5 class="card-title">${allPlans.data[index].plan_name}</h5>
+                                     <h6 class="card-subtitle mb-2 text-muted">${allPlans.data[index].company_name}</h6>
+                                     <ul class="list-group list-group-flush">
+                                     <li class="list-group-item">January Estimated Cost: $${costJan}</li>
+                                         <li class="list-group-item"><a href="${allPlans.data[index].fact_sheet}" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
+
+                                     </ul>
+                                 </div>
+                             </div>`;
+        planResults.innerHTML = allPlansHTMLoutput;
       }
 
       //   let allPlansHTMLoutput = `<div class="card">
