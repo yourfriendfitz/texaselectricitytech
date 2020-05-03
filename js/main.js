@@ -5,8 +5,6 @@ let usageSubmit = document.getElementById("usageSubmit");
 // Define plan list
 let planResults = document.getElementById("planResults");
 
-// add another event listener for click to grab inputs from date fields
-
 /**
  * Calculates the cost per month.
  *
@@ -56,6 +54,9 @@ function getPlans(userZipCode) {
   }).then((response) => response.json());
 }
 
+/**
+ * Gets the user's monthly cost values by the input
+ */
 function getUserMonthlyValues() {
   return [
     document.getElementById("usageJan").value,
@@ -74,7 +75,7 @@ function getUserMonthlyValues() {
 }
 
 function getUserAnnualCost() {
-  return getUserMonthlyValues().reduce((a, b) => a + b, 0)
+  return getUserMonthlyValues().reduce((a, b) => a + b, 0);
 }
 
 usageSubmit.addEventListener("click", async () => {
@@ -82,48 +83,25 @@ usageSubmit.addEventListener("click", async () => {
     document.getElementById("userZIP").value
   );
 
+  userMonthlyValues = getUserMonthlyValues();
+
+  // TODO: iterate through every plan
   availablePlans.forEach((plan) => {
-    usages.forEach((usage, index) => {
-      //iterate through each month in months
+    // TODO: iterate through each monthly value inside of each plan
+    userMonthlyValues.forEach((monthValue, index) => {
+      // TODO: create a card for each month in each plan
     });
 
-    let allPlansHTMLoutput = `<div class="card">
+    // FIX: display the data
+    planResults.innerHTML = `<div class="card">
                                  <div class="card-body">
                                      <h5 class="card-title">${allPlans.data[index].plan_name}</h5>
                                      <h6 class="card-subtitle mb-2 text-muted">${allPlans.data[index].company_name}</h6>
                                      <ul class="list-group list-group-flush">
                                      <li class="list-group-item">Total Estimated Cost: $${totalCost}</li>
                                          <li class="list-group-item"><a href="${allPlans.data[index].fact_sheet}" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
-
                                      </ul>
                                  </div>
                              </div>`;
-    planResults.innerHTML = allPlansHTMLoutput;
-  });
-});
-<div class="card-body">
-  <h5 class="card-title">${allPlans.data[index].plan_name}</h5>
-  <h6 class="card-subtitle mb-2 text-muted">${allPlans.data[index].company_name}</h6>
-  <ul class="list-group list-group-flush">
-    <li class="list-group-item">Total Estimated Cost: $${getUserAnnualCost()}</li>
-    <li class="list-group-item"><a href="${allPlans.data[index].fact_sheet}" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
-
-  </ul>
-</div>
-                             </div > `;
-    planResults.innerHTML = allPlansHTMLoutput;
-  });
-});
-                                 <div class="card-body">
-                                     <h5 class="card-title">${allPlans.data[index].plan_name}</h5>
-                                     <h6 class="card-subtitle mb-2 text-muted">${allPlans.data[index].company_name}</h6>
-                                     <ul class="list-group list-group-flush">
-                                     <li class="list-group-item">Total Estimated Cost: $${totalCost}</li>
-                                         <li class="list-group-item"><a href="${allPlans.data[index].fact_sheet}" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
-
-                                     </ul>
-                                 </div>
-                             </div>`;
-planResults.innerHTML = allPlansHTMLoutput;
   });
 });
