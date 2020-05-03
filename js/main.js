@@ -31,38 +31,74 @@ usageSubmit.addEventListener("click", function () {
   //api call
   let proxyUrl = `https://cors-anywhere.herokuapp.com/`;
   let callAddress = `http://api.powertochoose.org/api/PowerToChoose/plans?zip_code=${userZIP.value}`;
-  fetch(proxyUrl + callAddress)
+  fetch(proxyUrl + callAddress, { cache: "force-cache" })
     .then((response) => response.json())
     .then((allPlans) => {
       //end api call
       console.log(allPlans);
       for (index = 0; index < allPlans.data.length; index++) {
-        if (usageJan.value == 0) {
-          costJan = 0;
-        } else if (usageJan.value <= 500) {
-          costJan =
-            ((usageJan.value * allPlans.data[index].price_kwh500) / 500 / 100) *
-            usageJan.value; // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
-        } else if (usageJan.value <= 1000) {
-          costJan =
-            ((usageJan.value * allPlans.data[index].price_kwh1000) /
-              1000 /
-              100) *
-            usageJan.value; // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
-        } else {
-          costJan =
-            ((usageJan.value * allPlans.data[index].price_kwh2000) /
-              2000 /
-              100) *
-            usageJan.value; // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
+        //Jan
+        let months = [
+          "Jan",
+          "Feb",
+          "Mar",
+          "Apr",
+          "May",
+          "Jun",
+          "Jul",
+          "Aug",
+          "Sep",
+          "Oct",
+          "Nov",
+          "Dec",
+        ];
+        for (i = 0; i < months.length; i++) {
+          //iterate through each month in months
+          if (usageJan.value == 0) {
+            costJan = 0;
+          } else if (usageJan.value <= 500) {
+            costJan =
+              ((usageJan.value * allPlans.data[index].price_kwh500) /
+                500 /
+                100) *
+              usageJan.value; // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
+          } else if (usageJan.value <= 1000) {
+            costJan =
+              ((usageJan.value * allPlans.data[index].price_kwh1000) /
+                1000 /
+                100) *
+              usageJan.value; // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
+          } else {
+            costJan =
+              ((usageJan.value * allPlans.data[index].price_kwh2000) /
+                2000 /
+                100) *
+              usageJan.value; // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
+          }
         }
+
+        //end Jan
+
+        var totalCost =
+          costJan +
+          costFeb +
+          costMar +
+          costApr +
+          costMay +
+          costJun +
+          costJul +
+          costAug +
+          costSept +
+          costOct +
+          costNov +
+          costDec;
 
         let allPlansHTMLoutput = `<div class="card">
                                  <div class="card-body">
                                      <h5 class="card-title">${allPlans.data[index].plan_name}</h5>
                                      <h6 class="card-subtitle mb-2 text-muted">${allPlans.data[index].company_name}</h6>
                                      <ul class="list-group list-group-flush">
-                                     <li class="list-group-item">January Estimated Cost: $${costJan}</li>
+                                     <li class="list-group-item">Total Estimated Cost: $${totalCost}</li>
                                          <li class="list-group-item"><a href="${allPlans.data[index].fact_sheet}" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
 
                                      </ul>
