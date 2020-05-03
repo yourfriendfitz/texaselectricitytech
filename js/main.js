@@ -37,7 +37,6 @@ usageSubmit.addEventListener("click", function () {
       //end api call
       console.log(allPlans);
       for (index = 0; index < allPlans.data.length; index++) {
-        let costJan = 0;
         if (usageJan.value == 0) {
           costJan = 0;
         } else if (usageJan.value <= 500) {
