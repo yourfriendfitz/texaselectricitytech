@@ -74,25 +74,30 @@ usageSubmit.addEventListener("click", async () => {
 
   userMonthlyValues = getUserMonthlyValues();
 
-  //iterate through every plan
+  // iterate through every plan
   Array.prototype.forEach.call(availablePlans.data, (plan) => {
-    // TODO: iterate through each monthly value inside of each plan
+    // iterate through each monthly value inside of each plan
     Array.prototype.forEach.call(userMonthlyValues, (month) => {
-      console.log(plan);
-      console.log(month); // TODO: create a card for each month in each plan
+      console.log(calcMonthCost(month, plan));
+      // console.log(getUserAnnualCost(plan)); // this still isn't woring - it's adding all the values up across all plans
     });
-
-    // FIX: display the data
-    // planResults.innerHTML = `<div class="card">
-
-    //                              <div class="card-body">
-    //                                  <h5 class="card-title">${allPlans.data[index].plan_name}</h5>
-    //                                  <h6 class="card-subtitle mb-2 text-muted">${allPlans.data[index].company_name}</h6>
-    //                                  <ul class="list-group list-group-flush">
-    //                                  <li class="list-group-item">Total Estimated Cost: $${totalCost}</li>
-    //                                      <li class="list-group-item"><a href="${allPlans.data[index].fact_sheet}" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
-    //                                  </ul>
-    //                              </div>
-    //                          </div>`;
+    planCard = `<div class="card">
+                                <div class="card-body">
+                                  <h5 class="card-title">${plan.plan_name}</h5>
+                                    <h6 class="card-subtitle mb-2 text-muted">${
+                                      plan.company_name
+                                    }</h6>
+                                    <ul class="list-group list-group-flush">
+                                      <li class="list-group-item">January Estimated Cost: $${calcMonthCost(
+                                        usageJan.value,
+                                        plan
+                                      )}</li>
+                                      <li class="list-group-item"><a href="${
+                                        plan.fact_sheet
+                                      }" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
+                                    </ul>
+                                </div>
+                              </div>`;
   });
+  planResults.innerHTML = planCard;
 });
