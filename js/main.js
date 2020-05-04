@@ -8,28 +8,22 @@ let planResults = document.getElementById("planResults");
 /**
  * Calculates the cost per month.
  *
- * @param monthlyUsageCost The cost for the month give
+ * @param monthlyUsage The usage for the month given
  * @param plan The plan you want to calculate the cost for
  * @returns the cost per month
  */
-function calcMonthCost(monthlyUsageCost, plan) {
-  if (monthlyUsageCost == 0) {
+function calcMonthCost(monthlyUsage, plan) {
+  if (monthlyUsage == 0) {
     return 0;
-  } else if (monthlyUsageCost <= 500) {
+  } else if (monthlyUsage <= 500) {
     // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
-    return (
-      ((monthlyUsageCost * plan.price_kwh500) / 500 / 100) * monthlyUsageCost
-    );
-  } else if (monthlyUsageCost <= 1000) {
+    return ((monthlyUsage * plan.price_kwh500) / 500 / 100) * monthlyUsage;
+  } else if (monthlyUsage <= 1000) {
     // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
-    return (
-      ((monthlyUsageCost * plan.price_kwh1000) / 1000 / 100) * monthlyUsageCost
-    );
+    return ((monthlyUsage * plan.price_kwh1000) / 1000 / 100) * monthlyUsage;
   } else {
     // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
-    return (
-      ((monthlyUsageCost * plan.price_kwh2000) / 2000 / 100) * monthlyUsageCost
-    );
+    return ((monthlyUsage * plan.price_kwh2000) / 2000 / 100) * monthlyUsage;
   }
 }
 
@@ -80,25 +74,25 @@ usageSubmit.addEventListener("click", async () => {
 
   userMonthlyValues = getUserMonthlyValues();
 
-  // TODO: iterate through every plan
+  //iterate through every plan
   Array.prototype.forEach.call(availablePlans.data, (plan) => {
-    console.log(plan);
     // TODO: iterate through each monthly value inside of each plan
-    //userMonthlyValues.forEach((monthValue, index) => {
-    // TODO: create a card for each month in each plan
+    Array.prototype.forEach.call(userMonthlyValues, (month) => {
+      console.log(plan);
+      console.log(month); // TODO: create a card for each month in each plan
+    });
+
+    // FIX: display the data
+    // planResults.innerHTML = `<div class="card">
+
+    //                              <div class="card-body">
+    //                                  <h5 class="card-title">${allPlans.data[index].plan_name}</h5>
+    //                                  <h6 class="card-subtitle mb-2 text-muted">${allPlans.data[index].company_name}</h6>
+    //                                  <ul class="list-group list-group-flush">
+    //                                  <li class="list-group-item">Total Estimated Cost: $${totalCost}</li>
+    //                                      <li class="list-group-item"><a href="${allPlans.data[index].fact_sheet}" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
+    //                                  </ul>
+    //                              </div>
+    //                          </div>`;
   });
-
-  // FIX: display the data
-  // planResults.innerHTML = `<div class="card">
-
-  //                              <div class="card-body">
-  //                                  <h5 class="card-title">${allPlans.data[index].plan_name}</h5>
-  //                                  <h6 class="card-subtitle mb-2 text-muted">${allPlans.data[index].company_name}</h6>
-  //                                  <ul class="list-group list-group-flush">
-  //                                  <li class="list-group-item">Total Estimated Cost: $${totalCost}</li>
-  //                                      <li class="list-group-item"><a href="${allPlans.data[index].fact_sheet}" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
-  //                                  </ul>
-  //                              </div>
-  //                          </div>`;
 });
-//});
