@@ -63,8 +63,12 @@ function getUserMonthlyValues() {
   ];
 }
 
-function getUserTotalCost() {
-  return getUserMonthlyValues().reduce((acc, cur) => acc + cur, 0);
+function getUserTotalCost(plan) {
+  userTotalPlanCost = [];
+  Array.prototype.forEach.call(getUserMonthlyValues, (monthlyUsage) => {
+    userTotalPlanCost.push(calcMonthCost(monthlyUsage, plan));
+  });
+  return [userTotalPlanCost].reduce((acc, cur) => acc + cur, 0);
 }
 
 usageSubmit.addEventListener("click", async () => {
@@ -78,8 +82,8 @@ usageSubmit.addEventListener("click", async () => {
   Array.prototype.forEach.call(availablePlans.data, (plan) => {
     // iterate through each monthly value inside of each plan
     Array.prototype.forEach.call(userMonthlyValues, (month) => {
-      console.log(calcMonthCost(month, plan));
-      // console.log(getUserAnnualCost(plan)); // this still isn't woring - it's adding all the values up across all plans
+      // console.log(calcMonthCost(month, plan));
+      userMonthCost = Array.from(calcMonthCost(month, plan));
     });
     planCard = `<div class="card">
                                 <div class="card-body">
@@ -92,7 +96,9 @@ usageSubmit.addEventListener("click", async () => {
                                         usageJan.value,
                                         plan
                                       )}</li>
-                                      <li class="list-group-item">$${getUserTotalCost()}</li>
+                                      <li class="list-group-item">$${getUserTotalCost(
+                                        plan
+                                      )}</li>
                                       <li class="list-group-item"><a href="${
                                         plan.fact_sheet
                                       }" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
