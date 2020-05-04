@@ -92,6 +92,50 @@ usageSubmit.addEventListener("click", async () => {
                                         usageJan.value,
                                         plan
                                       )}</li>
+                                      <li class="list-group-item">February Estimated Cost: $${calcMonthCost(
+                                        usageFeb.value,
+                                        plan
+                                      )}</li>
+                                      <li class="list-group-item">March Estimated Cost: $${calcMonthCost(
+                                        usageMar.value,
+                                        plan
+                                      )}</li>
+                                      <li class="list-group-item">April Estimated Cost: $${calcMonthCost(
+                                        usageApr.value,
+                                        plan
+                                      )}</li>
+                                      <li class="list-group-item">May Estimated Cost: $${calcMonthCost(
+                                        usageMay.value,
+                                        plan
+                                      )}</li>
+                                      <li class="list-group-item">June Estimated Cost: $${calcMonthCost(
+                                        usageJun.value,
+                                        plan
+                                      )}</li>
+                                      <li class="list-group-item">July Estimated Cost: $${calcMonthCost(
+                                        usageJul.value,
+                                        plan
+                                      )}</li>
+                                      <li class="list-group-item">August Estimated Cost: $${calcMonthCost(
+                                        usageAug.value,
+                                        plan
+                                      )}</li>
+                                      <li class="list-group-item">September Estimated Cost: $${calcMonthCost(
+                                        usageSep.value,
+                                        plan
+                                      )}</li>
+                                      <li class="list-group-item">October Estimated Cost: $${calcMonthCost(
+                                        usageOct.value,
+                                        plan
+                                      )}</li>
+                                      <li class="list-group-item">November Estimated Cost: $${calcMonthCost(
+                                        usageNov.value,
+                                        plan
+                                      )}</li>
+                                      <li class="list-group-item">December Estimated Cost: $${calcMonthCost(
+                                        usageDec.value,
+                                        plan
+                                      )}</li>
                                       <li class="list-group-item"><a href="${
                                         plan.fact_sheet
                                       }" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
