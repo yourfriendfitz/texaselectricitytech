@@ -37,10 +37,11 @@ async function getPlans(userZipCode) {
   let proxyUrl = `https://cors-anywhere.herokuapp.com/`;
   let callAddress = `http://api.powertochoose.org/api/PowerToChoose/plans?zip_code=${userZipCode}`;
 
-  const response = await fetch(proxyUrl + callAddress, {
+  return await fetch(proxyUrl + callAddress, {
     cache: "force-cache",
-  });
-  return await response.json();
+  })
+    .then((response) => response.json())
+    .then((body) => body.data);
 }
 
 /**
@@ -48,63 +49,126 @@ async function getPlans(userZipCode) {
  */
 function getUserMonthlyValues() {
   return [
-    document.getElementById("usageJan").value,
-    document.getElementById("usageFeb").value,
-    document.getElementById("usageMar").value,
-    document.getElementById("usageApr").value,
-    document.getElementById("usageMay").value,
-    document.getElementById("usageJun").value,
-    document.getElementById("usageJul").value,
-    document.getElementById("usageAug").value,
-    document.getElementById("usageSep").value,
-    document.getElementById("usageOct").value,
-    document.getElementById("usageNov").value,
-    document.getElementById("usageDec").value,
+    {
+      name: "Jan",
+      value: document.getElementById("usageJan").value,
+    },
+    {
+      name: "Feb",
+      value: document.getElementById("usageFeb").value,
+    },
+    {
+      name: "Mar",
+      value: document.getElementById("usageMar").value,
+    },
+    {
+      name: "Apr",
+      value: document.getElementById("usageApr").value,
+    },
+    {
+      name: "May",
+      value: document.getElementById("usageMay").value,
+    },
+    {
+      name: "Jun",
+      value: document.getElementById("usageJun").value,
+    },
+    {
+      name: "Jul",
+      value: document.getElementById("usageJul").value,
+    },
+    {
+      name: "Aug",
+      value: document.getElementById("usageAug").value,
+    },
+    {
+      name: "Sep",
+      value: document.getElementById("usageSep").value,
+    },
+    {
+      name: "Oct",
+      value: document.getElementById("usageOct").value,
+    },
+    {
+      name: "Nov",
+      value: document.getElementById("usageNov").value,
+    },
+    {
+      name: "Dec",
+      value: document.getElementById("usageDec").value,
+    },
   ];
 }
 
 function getUserTotalCost(plan) {
   userTotalPlanCost = [];
-  Array.prototype.forEach.call(getUserMonthlyValues, (monthlyUsage) => {
+  getUserMonthlyValues().forEach((monthlyUsage) => {
+    //adjust calc for new object
     userTotalPlanCost.push(calcMonthCost(monthlyUsage, plan));
   });
   return [userTotalPlanCost].reduce((acc, cur) => acc + cur, 0);
+}
+
+function createPlanElement(month, plan) {
+  return `<div class="card">
+                              <div class="card-body">
+                                <h5 class="card-title">${plan.plan_name}</h5>
+                                  <h6 class="card-subtitle mb-2 text-muted">${
+                                    plan.company_name
+                                  }</h6>
+                                  <ul class="list-group list-group-flush">
+                                    <li class="list-group-item">${
+                                      month.name
+                                    } Estimated Cost: $${calcMonthCost(
+    month.value,
+    plan
+  )}</li>
+                                    <li class="list-group-item">$${getUserTotalCost(
+                                      plan
+                                    )}</li>
+                                    <li class="list-group-item"><a href="${
+                                      plan.fact_sheet
+                                    }" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
+                                  </ul>
+                              </div>
+                              </div>`;
+}
+
+function calculateCostsForAllPlans(userMonthlyValues, availablePlans) {
+  const calculatedPlans = [];
+  // iterate through every plan
+  availablePlans.forEach((plan, index) => {
+    calculatedPlans.push({
+      ...plan, //copy all same values
+      user_calculated_costs: {
+        total: 0,
+        months: [],
+      },
+    });
+    // iterate through each monthly value inside of each plan
+    userMonthlyValues.forEach((month) => {
+      const monthCalculatedCost = calcMonthCost(month.value, plan);
+      calculatedPlans[index].user_calculated_costs.total =
+        calculatedPlans[index].user_calculated_costs.total +
+        monthCalculatedCost;
+      calculatedPlans[index].user_calculated_costs.months.push({
+        name: month.name,
+        cost: monthCalculatedCost,
+      });
+    });
+  });
+  console.log(calculatedPlans);
+  return calculatedPlans;
 }
 
 usageSubmit.addEventListener("click", async () => {
   const availablePlans = await getPlans(
     document.getElementById("userZIP").value
   );
-
-  userMonthlyValues = getUserMonthlyValues();
-
-  // iterate through every plan
-  Array.prototype.forEach.call(availablePlans.data, (plan) => {
-    // iterate through each monthly value inside of each plan
-    Array.prototype.forEach.call(userMonthlyValues, (month) => {
-      // console.log(calcMonthCost(month, plan));
-      userMonthCost = Array.from(calcMonthCost(month, plan));
-    });
-    planCard = `<div class="card">
-                                <div class="card-body">
-                                  <h5 class="card-title">${plan.plan_name}</h5>
-                                    <h6 class="card-subtitle mb-2 text-muted">${
-                                      plan.company_name
-                                    }</h6>
-                                    <ul class="list-group list-group-flush">
-                                      <li class="list-group-item">January Estimated Cost: $${calcMonthCost(
-                                        usageJan.value,
-                                        plan
-                                      )}</li>
-                                      <li class="list-group-item">$${getUserTotalCost(
-                                        plan
-                                      )}</li>
-                                      <li class="list-group-item"><a href="${
-                                        plan.fact_sheet
-                                      }" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
-                                    </ul>
-                                </div>
-                              </div>`;
-  });
-  planResults.innerHTML = planCard;
+  const calculatedPlans = calculateCostsForAllPlans(
+    getUserMonthlyValues(),
+    availablePlans
+  );
+  // Sort by user's costs (ascending)
+  // Generate calculatedPlans onto the page (DOM) for the user to see
 });
