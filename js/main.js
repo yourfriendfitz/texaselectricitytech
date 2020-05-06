@@ -169,6 +169,6 @@ usageSubmit.addEventListener("click", async () => {
     newElement.id = plan[plan];
     newElement.className = "plan";
     newElement.innerHTML = createPlanElement(topCalculatedPlans[plan]);
-    document.body.appendChild(newElement);
+    planResults.appendChild(newElement);
   }
 });
