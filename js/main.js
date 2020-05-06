@@ -17,7 +17,12 @@ function calcMonthCost(monthlyUsage, plan) {
     return 0;
   } else if (monthlyUsage <= 500) {
     // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
-    return ((monthlyUsage * plan.price_kwh500) / 500 / 100) * monthlyUsage;
+    // (((((12-0) / (500 - 0)) * 400) * 400) /100)
+    return (
+      (((plan.price_kwh500 - 0) / (500 - 0)) * monthlyUsage * monthlyUsage) /
+      100
+    );
+    //return ((monthlyUsage * plan.price_kwh500) / 500 / 100) * monthlyUsage;
   } else if (monthlyUsage <= 1000) {
     // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
     return ((monthlyUsage * plan.price_kwh1000) / 1000 / 100) * monthlyUsage;
@@ -168,7 +173,7 @@ usageSubmit.addEventListener("click", async () => {
     return a.user_calculated_costs.total - b.user_calculated_costs.total;
   });
   // slice all but the 5 lowest cost plans for display
-  var topCalculatedPlans = calculatedPlans.slice(1, 6);
+  var topCalculatedPlans = calculatedPlans.slice(0, 5);
   // Generate calculatedPlans onto the page (DOM) for the user to see
   for (plan in topCalculatedPlans) {
     var newElement = document.createElement("div");
