@@ -170,5 +170,9 @@ usageSubmit.addEventListener("click", async () => {
     availablePlans
   );
   // Sort by user's costs (ascending)
+  calculatedPlans.sort(function (a, b) {
+    return a.user_calculated_costs.total - b.user_calculated_costs.total;
+  });
   // Generate calculatedPlans onto the page (DOM) for the user to see
+  planResults.innerHTML = createPlanElement();
 });
