@@ -161,12 +161,14 @@ usageSubmit.addEventListener("click", async () => {
   calculatedPlans.sort(function (a, b) {
     return a.user_calculated_costs.total - b.user_calculated_costs.total;
   });
+  // slice all but the 5 lowest cost plans for display
+  var topCalculatedPlans = calculatedPlans.slice(1, 6);
   // Generate calculatedPlans onto the page (DOM) for the user to see
-  for (plan in calculatedPlans) {
+  for (plan in topCalculatedPlans) {
     var newElement = document.createElement("div");
     newElement.id = plan[plan];
     newElement.className = "plan";
-    newElement.innerHTML = createPlanElement(calculatedPlans[plan]);
+    newElement.innerHTML = createPlanElement(topCalculatedPlans[plan]);
     document.body.appendChild(newElement);
   }
 });
