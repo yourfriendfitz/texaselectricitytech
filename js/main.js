@@ -109,26 +109,15 @@ function getUserTotalCost(plan) {
   return [userTotalPlanCost].reduce((acc, cur) => acc + cur, 0);
 }
 
-function createPlanElement(month, plan) {
+function createPlanElement(plan) {
   return `<div class="card">
                               <div class="card-body">
                                 <h5 class="card-title">${plan.plan_name}</h5>
-                                  <h6 class="card-subtitle mb-2 text-muted">${
-                                    plan.company_name
-                                  }</h6>
+                                  <h6 class="card-subtitle mb-2 text-muted">${plan.company_name}</h6>
                                   <ul class="list-group list-group-flush">
-                                    <li class="list-group-item">${
-                                      month.name
-                                    } Estimated Cost: $${calcMonthCost(
-    month.value,
-    plan
-  )}</li>
-                                    <li class="list-group-item">$${getUserTotalCost(
-                                      plan
-                                    )}</li>
-                                    <li class="list-group-item"><a href="${
-                                      plan.fact_sheet
-                                    }" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
+                                    
+                                    <li class="list-group-item">$${plan.user_calculated_costs.total}</li>
+                                    <li class="list-group-item"><a href="${plan.fact_sheet}" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
                                   </ul>
                               </div>
                               </div>`;
@@ -174,5 +163,7 @@ usageSubmit.addEventListener("click", async () => {
     return a.user_calculated_costs.total - b.user_calculated_costs.total;
   });
   // Generate calculatedPlans onto the page (DOM) for the user to see
-  planResults.innerHTML = createPlanElement();
+  calculatedPlans.forEach((plan) => {
+    planResults.innerHTML = createPlanElement(plan);
+  });
 });
