@@ -172,7 +172,7 @@ usageSubmit.addEventListener("click", async () => {
   // Generate calculatedPlans onto the page (DOM) for the user to see
   for (plan in topCalculatedPlans) {
     var newElement = document.createElement("div");
-    newElement.id = plan[plan];
+    newElement.id = [plan];
     newElement.className = "plan";
     newElement.innerHTML = createPlanElement(topCalculatedPlans[plan]);
     planResults.appendChild(newElement);
