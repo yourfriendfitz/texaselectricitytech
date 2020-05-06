@@ -115,8 +115,7 @@ function createPlanElement(plan) {
                                 <h5 class="card-title">${plan.plan_name}</h5>
                                   <h6 class="card-subtitle mb-2 text-muted">${plan.company_name}</h6>
                                   <ul class="list-group list-group-flush">
-                                    
-                                    <li class="list-group-item">$${plan.user_calculated_costs.total}</li>
+                                  <li class="list-group-item">$${plan.user_calculated_costs.total}</li>
                                     <li class="list-group-item"><a href="${plan.fact_sheet}" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
                                   </ul>
                               </div>
@@ -163,7 +162,11 @@ usageSubmit.addEventListener("click", async () => {
     return a.user_calculated_costs.total - b.user_calculated_costs.total;
   });
   // Generate calculatedPlans onto the page (DOM) for the user to see
-  calculatedPlans.forEach((plan) => {
-    planResults.innerHTML = createPlanElement(plan);
-  });
+  for (plan in calculatedPlans) {
+    var newElement = document.createElement("div");
+    newElement.id = plan[plan];
+    newElement.className = "plan";
+    newElement.innerHTML = createPlanElement(calculatedPlans[plan]);
+    document.body.appendChild(newElement);
+  }
 });
