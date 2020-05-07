@@ -150,7 +150,8 @@ if ($("#planResults").is(":empty")) {
 let example = document.getElementById("example");
 
 function createPlanElement(plan) {
-  return `<div class="card m-3">
+  return `<div class="card h-100" style="width: 22rem;">
+              <img src="${plan.company_logo}" class="card-img-top" alt="...">
                               <div class="card-body">
                                 <h5 class="card-title">${plan.plan_name}</h5>
                                   <h6 class="card-subtitle mb-2 text-muted">${
@@ -160,12 +161,35 @@ function createPlanElement(plan) {
                                   <li class="list-group-item">Estimated Total Cost: $${plan.user_calculated_costs.total.toFixed(
                                     2
                                   )}</li>
+                                  <li class="list-group-item">Minumum Usage Charge?: ${
+                                    plan.minimum_usage
+                                  }</li>
+                                  <li class="list-group-item">New Customers Only?: ${
+                                    plan.new_customer
+                                  }</li>
+                                  <li class="list-group-item">Other Price Details: ${
+                                    plan.pricing_details
+                                  }</li>
+                                  <li class="list-group-item">Promotions: ${
+                                    plan.promotions
+                                  }</li>
+                                  <li class="list-group-item">Renewable Energy: ${
+                                    plan.renewable_energy_description
+                                  }</li>
+                                  <li class="list-group-item">Special Terms: ${
+                                    plan.special_terms
+                                  }</li>
                                     <li class="list-group-item"><a href="${
                                       plan.fact_sheet
                                     }" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
                                   </ul>
                               </div>
-                              </div>`;
+                <div class="card-footer">
+                <a href="${
+                  plan.go_to_plan
+                }" class="btn btn-outline-success" target="_blank" rel="noopener noreferrer">Sign Up On Provider Site</a>
+              </div>
+            </div>`;
 }
 
 function calculateCostsForAllPlans(userMonthlyValues, availablePlans) {
@@ -208,7 +232,7 @@ usageSubmit.addEventListener("click", async () => {
     return a.user_calculated_costs.total - b.user_calculated_costs.total;
   });
   // slice all but the 5 lowest cost plans for display
-  var topCalculatedPlans = calculatedPlans.slice(0, 5);
+  var topCalculatedPlans = calculatedPlans.slice(0, 3);
   // Generate calculatedPlans onto the page (DOM) for the user to see
   for (plan in topCalculatedPlans) {
     var newElement = document.createElement("div");

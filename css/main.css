@@ -4,3 +4,13 @@
 .jumbotron {
   margin-bottom: -4rem;
 }
+
+.card-img-top {
+  height: 40px;
+  width: auto;
+  align-self: center;
+}
+
+.card {
+  padding: 20px;
+}
