@@ -158,25 +158,25 @@ function createPlanElement(plan) {
                                     plan.company_name
                                   }</h6>
                                   <ul class="list-group list-group-flush">
-                                  <li class="list-group-item">Estimated Total Cost: $${plan.user_calculated_costs.total.toFixed(
+                                  <li class="list-group-item"><b>Estimated Total Cost:</b> $${plan.user_calculated_costs.total.toFixed(
                                     2
                                   )}</li>
-                                  <li class="list-group-item">Minumum Usage Charge?: ${
+                                  <li class="list-group-item"><b>Minumum Usage Charge?:</b> ${
                                     plan.minimum_usage
                                   }</li>
-                                  <li class="list-group-item">New Customers Only?: ${
+                                  <li class="list-group-item"><b>New Customers Only?:</b> ${
                                     plan.new_customer
                                   }</li>
-                                  <li class="list-group-item">Other Price Details: ${
+                                  <li class="list-group-item"><b>Other Price Details:</b> ${
                                     plan.pricing_details
                                   }</li>
-                                  <li class="list-group-item">Promotions: ${
+                                  <li class="list-group-item"><b>Promotions:</b> ${
                                     plan.promotions
                                   }</li>
-                                  <li class="list-group-item">Renewable Energy: ${
+                                  <li class="list-group-item"><b>Renewable Energy:</b> ${
                                     plan.renewable_energy_description
                                   }</li>
-                                  <li class="list-group-item">Special Terms: ${
+                                  <li class="list-group-item"><b>Special Terms: ${
                                     plan.special_terms
                                   }</li>
                                     <li class="list-group-item"><a href="${
@@ -184,7 +184,7 @@ function createPlanElement(plan) {
                                     }" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
                                   </ul>
                               </div>
-                <div class="card-footer">
+                <div class="card-footer text-center">
                 <a href="${
                   plan.go_to_plan
                 }" class="btn btn-outline-success" target="_blank" rel="noopener noreferrer">Sign Up On Provider Site</a>
