@@ -128,8 +128,29 @@ function getUserTotalCost(plan) {
   return [userTotalPlanCost].reduce((acc, cur) => acc + cur, 0);
 }
 
+if ($("#planResults").is(":empty")) {
+  var newElement = document.createElement("div");
+  newElement.id = "0";
+  newElement.className = "plan";
+  newElement.innerHTML = `<div class="card m-3">
+    <div id="example" class="card-body">
+      <h5 class="card-title">Your Best Plan</h5>
+        <h6 class="card-subtitle mb-2 text-muted">
+          Texas Energy Provider
+        </h6>
+        <ul class="list-group list-group-flush">
+        <li class="list-group-item">Estimated Total Cost: $100</li>
+          <li class="list-group-item"><a href="#" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
+        </ul>
+    </div>
+    </div>`;
+  planResults.appendChild(newElement);
+}
+
+let example = document.getElementById("example");
+
 function createPlanElement(plan) {
-  return `<div class="card">
+  return `<div class="card m-3">
                               <div class="card-body">
                                 <h5 class="card-title">${plan.plan_name}</h5>
                                   <h6 class="card-subtitle mb-2 text-muted">${
@@ -196,4 +217,5 @@ usageSubmit.addEventListener("click", async () => {
     newElement.innerHTML = createPlanElement(topCalculatedPlans[plan]);
     planResults.appendChild(newElement);
   }
+  example.parentNode.parentNode.removeChild(example.parentNode);
 });
