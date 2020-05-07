@@ -13,4 +13,29 @@
 }
 
 .jumbotron {
+  margin-bottom: 0;
+}
+
+.github {
+  color: #ffffff;
+}
+
+.child {
+  border-top: 40px solid #e9ecef;
+  border-left: 50vw solid transparent;
+  border-right: 50vw solid transparent;
+  width: 0;
+  height: 0;
+  bottom: -40px;
+  content: "";
+  display: block;
+  overflow: hidden;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+#resultsContainer {
+  margin-top: -5rem;
+  min-height: 5rem;
 }
