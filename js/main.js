@@ -180,7 +180,7 @@ function createPlanElement(plan) {
                                     plan.renewable_energy_description
                                   }</li>
                                   <li class="list-group-item">
-                                  <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#modal${
+                                  <button type="button" class="btn btn-outline-info btn-block" data-toggle="modal" data-target="#modal${
                                     plan.plan_id
                                   }">
                                   <i class="fas fa-asterisk"></i> Special Terms
@@ -215,13 +215,13 @@ function createPlanElement(plan) {
                                   </li>
                                     <li class="list-group-item"><a href="${
                                       plan.fact_sheet
-                                    }" class="btn btn-outline-info" target="_blank" rel="noopener noreferrer"><i class="fas fa-search-dollar"></i> Plan Fact Sheet</a></li>
+                                    }" class="btn btn-outline-info btn-block" target="_blank" rel="noopener noreferrer"><i class="fas fa-search-dollar"></i> Plan Fact Sheet</a></li>
                                   </ul>
                              
                 <div class="card-footer border-0">
                 <a href="${
                   plan.go_to_plan
-                }" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-signature"></i> Sign Up On Provider Site</a>
+                }" class="btn btn-primary btn-block" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-signature"></i> Sign Up On Provider Site</a>
               </div>
             </div>`;
 }
