@@ -151,12 +151,15 @@ function getUserTotalCost(plan) {
 
 function createPlanElement(plan) {
   return `<div class="card h-100" style="width: 22rem;">
-              <img src="${plan.company_logo}" class="card-img-top" alt="...">
+              <img src="${
+                plan.company_logo
+              }" class="card-img-top" alt="Card image cap">
                               <div class="card-body">
-                                <h5 class="card-title">${plan.plan_name}</h5>
+                                  <h5 class="card-title">${plan.plan_name}</h5>
                                   <h6 class="card-subtitle mb-2 text-muted">${
                                     plan.company_name
                                   }</h6>
+                                  </div>
                                   <ul class="list-group list-group-flush">
                                   <li class="list-group-item"><b>Estimated Total Cost:</b> $${plan.user_calculated_costs.total.toFixed(
                                     2
@@ -180,7 +183,7 @@ function createPlanElement(plan) {
                                   <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#modal${
                                     plan.plan_id
                                   }">
-  Special Terms
+                                  <i class="fas fa-asterisk"></i> Special Terms
 </button>
 
 <!-- Modal -->
@@ -212,13 +215,13 @@ function createPlanElement(plan) {
                                   </li>
                                     <li class="list-group-item"><a href="${
                                       plan.fact_sheet
-                                    }" class="btn btn-outline-info" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
+                                    }" class="btn btn-outline-info" target="_blank" rel="noopener noreferrer"><i class="fas fa-search-dollar"></i> Plan Fact Sheet</a></li>
                                   </ul>
-                              </div>
-                <div class="card-footer text-center">
+                             
+                <div class="card-footer border-0">
                 <a href="${
                   plan.go_to_plan
-                }" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Sign Up On Provider Site</a>
+                }" class="btn btn-primary" target="_blank" rel="noopener noreferrer"><i class="fas fa-file-signature"></i> Sign Up On Provider Site</a>
               </div>
             </div>`;
 }
