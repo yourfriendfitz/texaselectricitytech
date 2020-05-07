@@ -266,12 +266,12 @@ usageSubmit.addEventListener("click", async () => {
     return a.user_calculated_costs.total - b.user_calculated_costs.total;
   });
   // slice all but the 5 lowest cost plans for display
-  var topCalculatedPlans = calculatedPlans.slice(0, 3);
+  var topCalculatedPlans = calculatedPlans.slice(0, 9);
   // Generate calculatedPlans onto the page (DOM) for the user to see
   for (plan in topCalculatedPlans) {
     var newElement = document.createElement("div");
     newElement.id = [plan];
-    newElement.className = "plan";
+    newElement.className = "plan  mb-4";
     newElement.innerHTML = createPlanElement(topCalculatedPlans[plan]);
     planResults.appendChild(newElement);
   }
