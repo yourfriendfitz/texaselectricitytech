@@ -25,10 +25,24 @@ function calcMonthCost(monthlyUsage, plan) {
     //return ((monthlyUsage * plan.price_kwh500) / 500 / 100) * monthlyUsage;
   } else if (monthlyUsage <= 1000) {
     // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
-    return ((monthlyUsage * plan.price_kwh1000) / 1000 / 100) * monthlyUsage;
+    //return ((monthlyUsage * plan.price_kwh1000) / 1000 / 100) * monthlyUsage;
+    return (
+      (((monthlyUsage - 500) *
+        ((plan.price_kwh1000 - plan.price_kwh500) / (1000 - 500)) +
+        plan.price_kwh500) *
+        monthlyUsage) /
+      100
+    );
   } else {
     // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
-    return ((monthlyUsage * plan.price_kwh2000) / 2000 / 100) * monthlyUsage;
+    //return ((monthlyUsage * plan.price_kwh2000) / 2000 / 100) * monthlyUsage;
+    return (
+      (((monthlyUsage - 1000) *
+        ((plan.price_kwh2000 - plan.price_kwh1000) / (2000 - 1000)) +
+        plan.price_kwh1000) *
+        monthlyUsage) /
+      100
+    );
   }
 }
 
