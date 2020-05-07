@@ -176,18 +176,49 @@ function createPlanElement(plan) {
                                   <li class="list-group-item"><b>Renewable Energy:</b> ${
                                     plan.renewable_energy_description
                                   }</li>
-                                  <li class="list-group-item"><b>Special Terms: ${
-                                    plan.special_terms
-                                  }</li>
+                                  <li class="list-group-item">
+                                  <button type="button" class="btn btn-outline-info" data-toggle="modal" data-target="#modal${
+                                    plan.plan_id
+                                  }">
+  Special Terms
+</button>
+
+<!-- Modal -->
+<div class="modal fade" id="modal${
+    plan.plan_id
+  }" tabindex="-1" role="dialog" aria-labelledby="modal${
+    plan.plan_id
+  }Label" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modal${plan.plan_id}Label">${
+    plan.plan_name
+  } Special Terms</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+      ${plan.special_terms}
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+                                  
+                                  </li>
                                     <li class="list-group-item"><a href="${
                                       plan.fact_sheet
-                                    }" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
+                                    }" class="btn btn-outline-info" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
                                   </ul>
                               </div>
                 <div class="card-footer text-center">
                 <a href="${
                   plan.go_to_plan
-                }" class="btn btn-outline-success" target="_blank" rel="noopener noreferrer">Sign Up On Provider Site</a>
+                }" class="btn btn-primary" target="_blank" rel="noopener noreferrer">Sign Up On Provider Site</a>
               </div>
             </div>`;
 }
