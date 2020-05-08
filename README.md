@@ -9,3 +9,7 @@ TexasEnergy.io is a JavaScript powered redsidental electricity plan rate compari
 ## To Do Items
 
 - Filter results by contract length and renewable energy plans.
+
+## Contributors
+
+- Special thanks to [Josh Medeski](https://github.com/joshmedeski) for his assistance with helping refactor
