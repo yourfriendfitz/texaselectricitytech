@@ -53,7 +53,8 @@ async function getPlans(userZipCode) {
   let proxyUrl = `https://cors-anywhere.herokuapp.com/`;
   let callAddress = `http://api.powertochoose.org/api/PowerToChoose/plans?zip_code=${userZipCode}`;
 
-  return await fetch(proxyUrl + callAddress, {
+  // add "fetch(proxyUrl + callAddress, {" for testing
+  return await fetch(callAddress, {
     cache: "force-cache",
   })
     .then((response) => response.json())
