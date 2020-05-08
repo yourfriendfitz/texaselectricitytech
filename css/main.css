@@ -40,3 +40,14 @@
   margin-top: -5rem;
   min-height: 5rem;
 }
+.plan {
+  position: relative;
+}
+
+.badge {
+  position: absolute;
+  top: -5px;
+  left: 11px;
+  z-index: 1;
+  font-size: 16px;
+}

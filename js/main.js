@@ -155,7 +155,9 @@ function createPlanElement(plan) {
                 plan.company_logo
               }" class="card-img-top" alt="Card image cap">
                               <div class="card-body">
-                                  <h5 class="card-title">${plan.plan_name}</h5>
+                                  <h5 class="card-title" id="plan-title">${
+                                    plan.plan_name
+                                  }</h5>
                                   <h6 class="card-subtitle mb-2 text-muted">${
                                     plan.company_name
                                   }</h6>
@@ -275,5 +277,9 @@ usageSubmit.addEventListener("click", async () => {
     newElement.innerHTML = createPlanElement(topCalculatedPlans[plan]);
     planResults.appendChild(newElement);
   }
-  // example.parentNode.parentNode.removeChild(example.parentNode);
+  var firstPlan = document.getElementById("0");
+  var bestBadge = document.createElement("span");
+  bestBadge.className = "badge badge-primary";
+  bestBadge.innerHTML = "Best Plan";
+  firstPlan.insertBefore(bestBadge, firstPlan.firstChild);
 });
