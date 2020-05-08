@@ -150,7 +150,7 @@ function getUserTotalCost(plan) {
 // let example = document.getElementById("example");
 
 function createPlanElement(plan) {
-  return `<div class="card h-100" style="width: 22rem;">
+  return `<div class="card h-100" style="width: 21.8rem;">
               <img src="${
                 plan.company_logo
               }" class="card-img-top" alt="Card image cap">
@@ -186,33 +186,35 @@ function createPlanElement(plan) {
                                     plan.plan_id
                                   }">
                                   <i class="fas fa-asterisk"></i> Special Terms
-</button>
+                                  </button>
 
-<!-- Modal -->
-<div class="modal fade" id="modal${
-    plan.plan_id
-  }" tabindex="-1" role="dialog" aria-labelledby="modal${
+                                  <!-- Modal -->
+                                  <div class="modal fade" id="modal${
+                                    plan.plan_id
+                                  }" tabindex="-1" role="dialog" aria-labelledby="modal${
     plan.plan_id
   }Label" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="modal${plan.plan_id}Label">${
+                                    <div class="modal-dialog" role="document">
+                                      <div class="modal-content">
+                                        <div class="modal-header">
+                                          <h5 class="modal-title" id="modal${
+                                            plan.plan_id
+                                          }Label">${
     plan.plan_name
   } Special Terms</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-      ${plan.special_terms}
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
+                                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                            <span aria-hidden="true">&times;</span>
+                                          </button>
+                                        </div>
+                                        <div class="modal-body">
+                                        ${plan.special_terms}
+                                        </div>
+                                        <div class="modal-footer">
+                                          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </div>
                                   
                                   </li>
                                     <li class="list-group-item"><a href="${
