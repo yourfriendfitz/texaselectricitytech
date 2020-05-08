@@ -14,18 +14,16 @@ let planResults = document.getElementById("planResults");
  */
 function calcMonthCost(monthlyUsage, plan) {
   if (monthlyUsage == 0) {
+    // if usage is 0 set cost to 0
     return 0;
   } else if (monthlyUsage <= 500) {
-    // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
-    // (((((12-0) / (500 - 0)) * 400) * 400) /100)
+    // if usage is less than 500, calculate rate of change from 0 to 500 kWh and apply to usage
     return (
       (((plan.price_kwh500 - 0) / (500 - 0)) * monthlyUsage * monthlyUsage) /
       100
     );
-    //return ((monthlyUsage * plan.price_kwh500) / 500 / 100) * monthlyUsage;
   } else if (monthlyUsage <= 1000) {
-    // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
-    //return ((monthlyUsage * plan.price_kwh1000) / 1000 / 100) * monthlyUsage;
+    // if usage is less than 1000, calculate rate of change from 500 to 1000 kWh and apply to usage
     return (
       (((monthlyUsage - 500) *
         ((plan.price_kwh1000 - plan.price_kwh500) / (1000 - 500)) +
@@ -34,8 +32,7 @@ function calcMonthCost(monthlyUsage, plan) {
       100
     );
   } else {
-    // usage in KwH times 500 Kwh cost (in cents) divided by 500 KwH = rate for usage in cents / 100 * usage = cost for usage in dollars
-    //return ((monthlyUsage * plan.price_kwh2000) / 2000 / 100) * monthlyUsage;
+    // if usage is more than 1000, calculate rate of change from 1000 to 2000 kWh and apply to usage
     return (
       (((monthlyUsage - 1000) *
         ((plan.price_kwh2000 - plan.price_kwh1000) / (2000 - 1000)) +
@@ -119,6 +116,14 @@ function getUserMonthlyValues() {
   ];
 }
 
+/**
+ * Calculates total cost per plan by taking user monthly usage, passing to calcMonthCost, and reducing to total
+ *
+ * @param userTotalPlanCost an array of all monthly costs reduced to total cost
+ * @param plan the plan you want to calculate the total cost for
+ * @returns reducted total cost per plan based on user monthly usage values
+ */
+
 function getUserTotalCost(plan) {
   userTotalPlanCost = [];
   getUserMonthlyValues().forEach((monthlyUsage) => {
@@ -128,27 +133,9 @@ function getUserTotalCost(plan) {
   return [userTotalPlanCost].reduce((acc, cur) => acc + cur, 0);
 }
 
-// if ($("#planResults").is(":empty")) {
-//   var newElement = document.createElement("div");
-//   newElement.id = "0";
-//   newElement.className = "plan";
-//   newElement.innerHTML = `<div class="card m-3">
-//     <div id="example" class="card-body">
-//       <h5 class="card-title">Your Best Plan</h5>
-//         <h6 class="card-subtitle mb-2 text-muted">
-//           Texas Energy Provider
-//         </h6>
-//         <ul class="list-group list-group-flush">
-//         <li class="list-group-item">Estimated Total Cost: $100</li>
-//           <li class="list-group-item"><a href="#" target="_blank" rel="noopener noreferrer">Plan Fact Sheet</a></li>
-//         </ul>
-//     </div>
-//     </div>`;
-//   planResults.appendChild(newElement);
-// }
-
-// let example = document.getElementById("example");
-
+/**
+ * Generate HTML elements for each plan
+ */
 function createPlanElement(plan) {
   return `<div class="card h-100" style="width: 21.8rem;">
               <img src="${
@@ -230,6 +217,12 @@ function createPlanElement(plan) {
             </div>`;
 }
 
+/**
+ * Gets costs for all plans based on user usage and appends them to the availablePlans array
+ *
+ * @param calculatedPlans All plans with the monthly and total costs appended to them
+ * @returns an array with all plans including all monthly and total costs
+ */
 function calculateCostsForAllPlans(userMonthlyValues, availablePlans) {
   const calculatedPlans = [];
   // iterate through every plan
@@ -256,6 +249,12 @@ function calculateCostsForAllPlans(userMonthlyValues, availablePlans) {
   console.log(calculatedPlans);
   return calculatedPlans;
 }
+
+/**
+ * Upon clicking the button, grab all data inputs and async function to append zip to api for fetch. Then, appy usage cost calculation to all plans and sort by ascending order. Then, iterate through while rendering HTML elements
+ *
+ * @param topCalculatedPlans calculated plans sorted in ascending order by total cost, sliced
+ */
 
 usageSubmit.addEventListener("click", async () => {
   const availablePlans = await getPlans(
