@@ -8,7 +8,7 @@ Using the user's monthly usage data (manually entered) and zipcode, the site run
 
 The API provides estimated cost in cents/kWh at 500kWh, 1000kWh, and 2000kWh usage levels. In order to estimate costs at any usage, the site calculates a rate of change between the points the usage falls between and then applies that rate of change to rate of the usage.
 
-![example of typical plan api rate response](https://github.com/jasonephraim/texaselectricitytech/blob/master/img/max-bender-iF5odYWB_nQ-unsplash.jpg?raw=true)
+![example of typical plan api rate response](https://github.com/jasonephraim/texaselectricitytech/blob/master/img/Screen%20Shot%202020-05-08%20at%204.48.59%20PM.png?raw=true)
 
 ## Tech
 
