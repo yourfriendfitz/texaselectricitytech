@@ -54,7 +54,7 @@ async function getPlans(userZipCode) {
   let callAddress = `http://api.powertochoose.org/api/PowerToChoose/plans?zip_code=${userZipCode}`;
 
   // add "fetch(proxyUrl + callAddress, {" for testing
-  return await fetch(callAddress, {
+  return await fetch(proxyUrl + callAddress, {
     cache: "force-cache",
   })
     .then((response) => response.json())
