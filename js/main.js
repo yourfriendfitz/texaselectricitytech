@@ -160,6 +160,9 @@ function createPlanElement(plan) {
                                   <li class="list-group-item"><b>New Customers Only?:</b> ${
                                     plan.new_customer
                                   }</li>
+                                  <li class="list-group-item"><b>Contract Length:</b> ${
+                                    plan.term_value
+                                  } Months</li>
                                   <li class="list-group-item"><b>Other Price Details:</b> ${
                                     plan.pricing_details
                                   }</li>
