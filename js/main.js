@@ -61,6 +61,15 @@ async function getPlans(userZipCode) {
     .then((body) => body.data);
 }
 
+/*
+function to return value from input
+*/
+function getValue(id) {
+  const value = document.getElementById(id).value
+  return 
+    value === "" ? 0 : value
+}
+
 /**
  * Gets the user's monthly cost values by the input
  */
@@ -68,51 +77,51 @@ function getUserMonthlyValues() {
   return [
     {
       name: "Jan",
-      value: document.getElementById("usageJan").value,
+      value: getValue("usageJan")
     },
     {
       name: "Feb",
-      value: document.getElementById("usageFeb").value,
+      value: getValue("usageFeb")
     },
     {
       name: "Mar",
-      value: document.getElementById("usageMar").value,
+      value: getValue("usageMar")
     },
     {
       name: "Apr",
-      value: document.getElementById("usageApr").value,
+      value: getValue("usageApr")
     },
     {
       name: "May",
-      value: document.getElementById("usageMay").value,
+      value: getValue("usageMay")
     },
     {
       name: "Jun",
-      value: document.getElementById("usageJun").value,
+      value: getValue("usageJun")
     },
     {
       name: "Jul",
-      value: document.getElementById("usageJul").value,
+      value: getValue("usageJul")
     },
     {
       name: "Aug",
-      value: document.getElementById("usageAug").value,
+      value: getValue("usageAug")
     },
     {
       name: "Sep",
-      value: document.getElementById("usageSep").value,
+      value: getValue("usageSep")
     },
     {
       name: "Oct",
-      value: document.getElementById("usageOct").value,
+      value: getValue("usageOct")
     },
     {
       name: "Nov",
-      value: document.getElementById("usageNov").value,
+      value: getValue("usageNov")
     },
     {
       name: "Dec",
-      value: document.getElementById("usageDec").value,
+      value: getValue("usageDec")
     },
   ];
 }
